@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DOCKER_REPO_URI=708464146667.dkr.ecr.ap-southeast-2.amazonaws.com/msdemo
+DOCKER_REPO_URI=017820685114.dkr.ecr.us-west-1.amazonaws.com/msdemo
 
 
 function build() {
@@ -19,7 +19,7 @@ function build() {
 
 function push() {
     echo "Push images"
-    $(aws ecr get-login --no-include-email --region ap-southeast-2)
+    $(aws ecr get-login-password --region us-west-1 | docker login --username AWS --password-stdin 017820685114.dkr.ecr.us-west-1.amazonaws.com)
 
     docker tag msdemo/customerservice:latest $DOCKER_REPO_URI/customerservice:latest
     docker tag msdemo/orderservice:latest $DOCKER_REPO_URI/orderservice:latest
